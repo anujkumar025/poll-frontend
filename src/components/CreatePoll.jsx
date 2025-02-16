@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import BACKEND_API from '../assets/config';
 
 export default function CreatePoll({ username }) {
   const [title, setTitle] = useState('');
@@ -29,7 +30,7 @@ export default function CreatePoll({ username }) {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/api/createpoll', {
+      const response = await axios.post(`${BACKEND_API}/createpoll`, {
         username,
         title,
         options,

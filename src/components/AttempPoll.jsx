@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import BACKEND_API from '../assets/config';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -19,7 +20,7 @@ export default function AttemptPoll() {
     useEffect(() => {
         const fetchPoll = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/polls?username=${username}`);
+                const response = await axios.get(`${BACKEND_API}/polls?username=${username}`);
                 if (response.data.title && response.data.options.length) {
                     setPoll(response.data);
                 } else {
@@ -41,7 +42,7 @@ export default function AttemptPoll() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:3000/api/select', {
+            const response = await axios.post(`${BACKEND_API}/select`, {
                 username,
                 selectOption: selectedOption
             });
